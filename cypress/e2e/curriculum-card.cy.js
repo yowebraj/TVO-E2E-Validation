@@ -85,7 +85,7 @@ describe('Test Scenario - Curriculum Card Validation', () => {
     cy.get('[class="preview-hero"]')
       .contains('Number')
       .contains('Learning Activity')
-    
+
     cy.go('back')
 
     cy.get('[class="shogun-heading-component"]').contains('Resources for Learning').scrollIntoView({ duration: 1000 })
@@ -104,5 +104,60 @@ describe('Test Scenario - Curriculum Card Validation', () => {
         .contains('Coding')
         .should('be.visible')
     })
+  })
+
+  it('Validate the Learning Activities table can go through each tab', () => {
+    cy.get('[class="head-fancy"]').scrollIntoView({ duration: 1000 })
+
+    // "Number" tab validation
+    cy.get('[class="tabb"]').contains('Number').click()
+
+    cy.get('[class="tabp"]').first().within(() => {
+      cy.get('[class="tablas"]')
+        .find('a')
+        .its('length')
+        .should('be.eq', 12)
+    })
+      
+    // "Algebra" tab validation
+    cy.get('[class="tabb"]').contains('Algebra').click()
+
+    cy.get('[class="tabp"]').first().within(() => {
+      cy.get('[class="tablas"]')
+        .find('a')
+        .its('length')
+        .should('be.eq', 12)
+    })
+
+    // "Data" tab validation
+    cy.get('[class="tabb"]').contains('Data').click()
+    
+    cy.get('[class="tabp"]').first().within(() => {
+      cy.get('[class="tablas"]')
+        .find('a')
+        .its('length')
+        .should('be.eq', 12)
+    })
+
+    // "Spatial Sense" tab validation
+    cy.get('[class="tabb"]').contains('Spatial Sense').click()
+
+    cy.get('[class="tabp"]').first().within(() => {
+      cy.get('[class="tablas"]')
+        .find('a')
+        .its('length')
+        .should('be.eq', 12)
+    })
+
+    // "Financial Literacy" tab validation
+    cy.get('[class="tabb"]').contains('Financial Literacy').click()
+
+    cy.get('[class="tabp"]').first().within(() => {
+      cy.get('[class="tablas"]')
+        .find('a')
+        .its('length')
+        .should('be.eq', 12)
+    })
+
   })
 })

@@ -45,7 +45,7 @@ describe('Test Scenario - Curriculum Card Validation', () => {
     cy.get('[class="bullet-list"]').contains('Financial Literacy')
   })
 
-  it('Validate links are working as expected', () => {
+  it('Validate some links are working as expected', () => {
     // 1st "helpful tips" link
     cy.get('a')
       .contains('helpful tips')
@@ -58,14 +58,51 @@ describe('Test Scenario - Curriculum Card Validation', () => {
       .click()
 
     cy.location('pathname').should('eq', '/pages/helpful-tips')
+    cy.get('[class="shogun-heading-component"]')
+      .should('contain', 'Tips for Using TVO Learn')
     cy.go('back')
 
-    // The 2nd "helpful tips" link doesn't have the same link as the first one (Still might be using the default shopify one)
+    // Defect: The 2nd "helpful tips" link doesn't have the same link as the first one (Still might be using the default shopify one)
     // cy.get('a')
     //   .contains('helpful tips')
     //   .should('be.visible')
     //   .should('have.attr', 'href')
     //   .should('include', 'https://tvo-learn.myshopify.com/pages/helpful-tips#learningactivities')
+
+    cy.get('[class="strands-top-box"]').scrollIntoView({ duration: 1000 })
+
+    cy.get('a')
+      .contains('Halves and Fourths')
+      .should('be.visible')
+      .should('have.attr', 'href')
+      .should('include', '/pages/grade-1-mathematics-number-learning-activity-7')
+
+    cy.get('a')
+      .contains('Halves and Fourths')
+      .click()
+
+    cy.location('pathname').should('eq', '/pages/grade-1-mathematics-number-learning-activity-7')
+    cy.get('[class="preview-hero"]')
+      .contains('Number')
+      .contains('Learning Activity')
     
+    cy.go('back')
+
+    cy.get('[class="shogun-heading-component"]').contains('Resources for Learning').scrollIntoView({ duration: 1000 })
+
+    cy.get('a[href*="/coding/secret-code"]')
+      .should('be.visible')
+      .should('have.attr', 'href')
+      .should('include', '/coding/secret-code')
+
+    cy.get('a[href*="/coding/secret-code"]')
+      .invoke('removeAttr', 'target')
+      .click()
+
+    cy.origin('https://www.tvokids.com', () => {
+      cy.get('[class="program-title"]')
+        .contains('Coding')
+        .should('be.visible')
+    })
   })
 })

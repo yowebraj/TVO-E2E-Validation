@@ -106,7 +106,7 @@ describe('Test Scenario - Curriculum Card Validation', () => {
     })
   })
 
-  it('Validate the Learning Activities table can go through each tab', () => {
+  it('Validate the Learning Activities table', () => {
     cy.get('[class="head-fancy"]').scrollIntoView({ duration: 1000 })
 
     // "Number" tab validation
@@ -118,7 +118,7 @@ describe('Test Scenario - Curriculum Card Validation', () => {
         .its('length')
         .should('be.eq', 12)
     })
-      
+
     // "Algebra" tab validation
     cy.get('[class="tabb"]').contains('Algebra').click()
 
@@ -131,7 +131,7 @@ describe('Test Scenario - Curriculum Card Validation', () => {
 
     // "Data" tab validation
     cy.get('[class="tabb"]').contains('Data').click()
-    
+
     cy.get('[class="tabp"]').first().within(() => {
       cy.get('[class="tablas"]')
         .find('a')
@@ -158,6 +158,104 @@ describe('Test Scenario - Curriculum Card Validation', () => {
         .its('length')
         .should('be.eq', 12)
     })
+  })
 
+  it('Validate the Vocabulary table', () => {
+    cy.get('[class="shogun-heading-component"]').contains('Vocabulary').scrollIntoView({ duration: 1000 })
+
+    // "Number" tab validation
+    cy.get('[class="shogun-tab-title"]').contains('Number').click()
+
+    cy.get('[class*="shogun-tab-content"]').first().within(() => {
+      cy.get('[class*="wordList"]')
+        .find('p')
+        .its('length')
+        .should('be.eq', 5)
+
+      cy.get('[class*="wordList"]').contains('50')
+      cy.get('[class*="wordList"]').contains('equal')
+      cy.get('[class*="wordList"]').contains('fraction')
+      cy.get('[class*="wordList"]').contains('number')
+      cy.get('[class*="wordList"]').contains('sharing')
+    })
+
+    // "Algebra" tab validation
+    cy.get('[class="shogun-tab-title"]').contains('Algebra').click()
+
+    cy.get('[class*="shogun-tab-content"]').eq(1).within(() => {
+      cy.get('[class*="wordList"]')
+        .find('p')
+        .its('length')
+        .should('be.eq', 8)
+    })
+
+    cy.get('[class*="wordList"]').contains('algebra')
+    cy.get('[class*="wordList"]').contains('code')
+    cy.get('[class*="wordList"]').contains('number sentence')
+    cy.get('[class*="wordList"]').contains('2+2=4')
+    cy.get('[class*="wordList"]').contains('order')
+    cy.get('[class*="wordList"]').contains('pattern')
+    cy.get('[class*="wordList"]').contains('prediction')
+    cy.get('[class*="wordList"]').contains('sequence')
+
+    // "Data" tab validation
+    cy.get('[class="shogun-tab-title"]').contains('Data').click()
+
+    cy.get('[class*="shogun-tab-content"]').eq(2).within(() => {
+      cy.get('[class*="wordList"]')
+        .find('p')
+        .its('length')
+        .should('be.eq', 8)
+    })
+
+    cy.get('[class*="wordList"]').contains('categories')
+    cy.get('[class*="wordList"]').contains('certain')
+    cy.get('[class*="wordList"]').contains('conclusion')
+    cy.get('[class*="wordList"]').contains('data')
+    cy.get('[class*="wordList"]').contains('impossible')
+    cy.get('[class*="wordList"]').contains('pictograph')
+    cy.get('[class*="wordList"]').contains('possible')
+    cy.get('[class*="wordList"]').contains('question')
+
+    // "Spatial" tab validation
+    cy.get('[class="shogun-tab-title"]').contains('Spatial').click()
+
+    cy.get('[class*="shogun-tab-content"]').eq(3).within(() => {
+      cy.get('[class*="wordList"]')
+        .find('p')
+        .its('length')
+        .should('be.eq', 9)
+    })
+
+    cy.get('[class*="wordList"]').contains('area')
+    cy.get('[class*="wordList"]').contains('calendar')
+    cy.get('[class*="wordList"]').contains('capacity')
+    cy.get('[class*="wordList"]').contains('length')
+    cy.get('[class*="wordList"]').contains('mass')
+    cy.get('[class*="wordList"]').contains('shapes')
+    cy.get('[class*="wordList"]').contains('spatial sense')
+    cy.get('[class*="wordList"]').contains('three-dimensional')
+    cy.get('[class*="wordList"]').contains('two-dimensional')
+    
+    // "Financial Literacy" tab validation
+    cy.get('[class="shogun-tab-title"]').contains('Financial Literacy').click()
+
+    cy.get('[class*="shogun-tab-content"]').eq(4).within(() => {
+      cy.get('[class*="wordList"]')
+        .find('p')
+        .its('length')
+        .should('be.eq', 10)
+    })
+
+    cy.get('[class*="wordList"]').contains('bill')
+    cy.get('[class*="wordList"]').contains('coin')
+    cy.get('[class*="wordList"]').contains('dime')
+    cy.get('[class*="wordList"]').contains('dollar')
+    cy.get('[class*="wordList"]').contains('financial literacy')
+    cy.get('[class*="wordList"]').contains('loonie')
+    cy.get('[class*="wordList"]').contains('nickel')
+    cy.get('[class*="wordList"]').contains('quarter')
+    cy.get('[class*="wordList"]').contains('toonie')
+    cy.get('[class*="wordList"]').contains('value')
   })
 })

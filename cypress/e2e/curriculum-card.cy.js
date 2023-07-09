@@ -236,7 +236,7 @@ describe('Test Scenario - Curriculum Card Validation', () => {
     cy.get('[class*="wordList"]').contains('spatial sense')
     cy.get('[class*="wordList"]').contains('three-dimensional')
     cy.get('[class*="wordList"]').contains('two-dimensional')
-    
+
     // "Financial Literacy" tab validation
     cy.get('[class="shogun-tab-title"]').contains('Financial Literacy').click()
 
@@ -257,5 +257,45 @@ describe('Test Scenario - Curriculum Card Validation', () => {
     cy.get('[class*="wordList"]').contains('quarter')
     cy.get('[class*="wordList"]').contains('toonie')
     cy.get('[class*="wordList"]').contains('value')
+  })
+
+  it('Validate user can subscribe to the TVO Learn Newsletter with a valid email', () => {
+    cy.get('[class="signup-inner"]').contains('Stay Connected').scrollIntoView({ duration: 1000 })
+
+    cy.get('[class*="email"]').type('testmairaj16@gmail.com{enter}')
+
+    cy.get('[class="response"]')
+      .should('be.visible')
+      .contains('Almost finished... We need to confirm your email address. To complete the subscription process, please click the link in the email we just sent you.')
+  })
+
+  it('Validate user cannot subscribe to the TVO Learn Newsletter with an invalid email', () => {
+    cy.get('[class="signup-inner"]').contains('Stay Connected').scrollIntoView({ duration: 1000 })
+
+    cy.get('[class*="email"]').type('test@gmail.com{enter}')
+
+    cy.get('[class="response"]')
+      .should('be.visible')
+      .contains('This email cannot be added to this list. Please enter a different email address.')
+  })
+
+  it('Validate user cannot subscribe to the TVO Learn Newsletter without entering an invalid email', () => {
+    cy.get('[class="signup-inner"]').contains('Stay Connected').scrollIntoView({ duration: 1000 })
+
+    cy.get('[class*="email"]').type('{enter}')
+
+    cy.get('[class="mce_inline_error"]')
+      .should('be.visible')
+      .contains('This field is required.')
+  })
+
+  it('Validate user cannot subscribe to the TVO Learn Newsletter when entering invalid characters', () => {
+    cy.get('[class="signup-inner"]').contains('Stay Connected').scrollIntoView({ duration: 1000 })
+
+    cy.get('[class*="email"]').type('@#0)*%&#%#@{enter}')
+
+    cy.get('[class="mce_inline_error"]')
+      .should('be.visible')
+      .contains('Please enter a valid email address.')
   })
 })

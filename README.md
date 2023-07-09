@@ -19,23 +19,31 @@ To get started with running the E2E validation tests locally, follow the instruc
 
 ```shell
 git clone https://github.com/yowebraj/TVO-E2E-Validation.git
+```
 
 2. Change to the project directory:
 
+```shell
 cd TVO-E2E-Validation
+```
 
 3. Install the dependencies:
 
+```shell
 npm install
+```
 
 ### Running the Tests
 
 To run the E2E validation tests on the Cypress Playground, use the following command:
 
+```shell
 npx cypress open
+```
 
 To run the E2E validation tests headless, use the following command:
 
+```shell
 npx cypress run
-
+```
 
